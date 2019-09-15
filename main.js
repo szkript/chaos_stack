@@ -7,19 +7,19 @@ let config = {
 };
 
 axios.get('https://registration.hungary.chaosstack.com/api/qualify/user_commands', config)
-    .then(response => (compareValues(response.data.userCommands)));
+    .then(response => (doStuff(response.data.userCommands)));
 
-function compareValues(commands) {
+function doStuff(commands) {
     let mapping = require('./mapping.json');
 
-    for (let command in commands) {
-        for (let map in mapping) {
+    for (let command of commands) {
+        for (let map of mapping) {
             if (command.user === map.user) {
                 for (room in map.rooms) {
                     if (room === command.targetRoom) {
-                        let lights = room.values;
-                        let data = command.action;
-                        data.add(lights);
+                        let data = Object;
+                        data.desiredState = command.action;
+                        data.lights = lights = map.rooms[room];
                         axios.post('https://registration.hungary.chaosstack.com/api/qualify/set_lights', data, config);
                     }
                 }
