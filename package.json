@@ -4,6 +4,6 @@
   "dependencies": {},
   "devDependencies": {
     "FileReader": "^0.10.2",
-    "axios": "^0.19.0"
+    "axios": "^0.21.1"
   }
 }
